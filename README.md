@@ -52,6 +52,84 @@ Använd manual setup: https://nextjs.org/docs/pages/building-your-application/te
 
 2. Lägg in valfria unit-tests på några komponenter
 
+package.json
+
+```json
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest --watch",
+    "test:ci": "jest --ci"
+  },
+```
+
+frontend/src/app/page.test.tsx
+
+jsx need some conversion and "use client" need a fake DOM
+
+```sh
+npm install --save-dev jest@^29.7.0
+npm install --save-dev jest-environment-jsdom@^29.7.0
+npm install --save-dev @babel/core@^7.24.5
+npm install --save-dev @babel/preset-env@^7.24.5
+npm install --save-dev @babel/preset-react@^7.24.1
+npm install --save-dev @testing-library/jest-dom@^6.4.5
+npm install --save-dev @testing-library/react@^15.0.7
+
+```
+
+```babelrc
+{
+  "presets": ["@babel/preset-react"]
+}
+```
+
+babel.config.js
+
+```js
+module.exports = {
+  presets: [
+    '@babel/preset-env', // Enables ES6+ features
+    '@babel/preset-react', // Enables React specific features
+  ],
+}
+```
+
+jest.config.js
+
+```js
+module.exports = {
+  transform: {
+    '^.+\\.jsx?$': 'babel-jest',
+  },
+
+  testEnvironment: 'jsdom',
+}
+```
+
+page.jsx
+
+```js
+'use client'
+import React from 'react'
+...
+```
+
+```jsx
+import { render, screen } from '@testing-library/react'
+import Page from './page'
+
+it('App Router: Works with Server Components', () => {
+  render(<Page />)
+
+  screen.debug()
+
+  expect(screen.getByRole('heading')).toHaveTextContent('hopp')
+})
+```
+
 3. Skapa ett github actions script som genomför tester och deployar koden på aws.
 
 Se föregående veckas föreläsningar för exempel på script.
