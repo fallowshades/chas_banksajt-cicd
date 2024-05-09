@@ -11,7 +11,7 @@ function Accounts({ params }) {
     try {
       const isProduction = true
       const url = isProduction
-        ? 'http://ec2-51-20-189-83.eu-north-1.compute.amazonaws.com:3001/me/accounts'
+        ? 'http://ec2-16-170-225-20.eu-north-1.compute.amazonaws.com:3001/me/accounts'
         : 'http://localhost:3001/me/accounts'
 
       const response = await fetch(url, {
@@ -39,7 +39,7 @@ function Accounts({ params }) {
     try {
       const isProduction = true
       const url = isProduction
-        ? 'http://ec2-51-20-189-83.eu-north-1.compute.amazonaws.com:3001/me/accounts/transactions'
+        ? 'http://ec2-16-170-225-20.eu-north-1.compute.amazonaws.com:3001/me/accounts/transactions'
         : 'http://localhost:3001/me/accounts/transactions'
       const response = await fetch(url, {
         method: 'POST',

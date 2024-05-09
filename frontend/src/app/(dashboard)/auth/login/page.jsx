@@ -12,7 +12,7 @@ export default function Login({ params }) {
     event.preventDefault()
     const isProduction = true
     const url = isProduction
-      ? 'http://ec2-51-20-189-83.eu-north-1.compute.amazonaws.com:3001/sessions'
+      ? 'ec2-16-170-225-20.eu-north-1.compute.amazonaws.com:3001/sessions'
       : 'http://localhost:3001/sessions'
     try {
       const response = await fetch(url, {
